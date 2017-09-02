@@ -1,0 +1,34 @@
+.PHONY: all clean presentation handout
+
+OUTPUTS = $(OUTPUT_PDF_PRESENTATION) $(OUTPUT_PDF_HANDOUT)
+OUTPUT_PDF_HANDOUT = slide-handout.pdf
+OUTPUT_PDF_PRESENTATION = slide-presentation.pdf
+
+SOURCE_PDF_BASE = slide.tex
+SOURCE_PDF_HANDOUT = slide-handout.tex
+SOURCE_PDF_PRESENTATION = slide-presentation.tex
+
+COMMON_RES_DIR = ../../resources
+COMMON_RES_DEPS_RELPATH = cc-by-4_0.pdf sasori-bg.png
+COMMON_RES_DEPS = $(addprefix $(COMMON_RES_DIR)/, $(COMMON_RES_DEPS_RELPATH))
+LOCAL_DEPS = $(wildcard images/*.png)
+
+XELATEX = tectonic
+
+all: $(OUTPUTS)
+
+clean:
+	rm -r $(OUTPUTS)
+
+handout: $(OUTPUT_PDF_HANDOUT)
+
+$(COMMON_RES_DEPS):%:
+	$(MAKE) -C $(COMMON_RES_DIR) $(@:$(COMMON_RES_DIR)/%=%)
+
+$(OUTPUT_PDF_HANDOUT): $(SOURCE_PDF_HANDOUT) $(SOURCE_PDF_BASE) $(COMMON_RES_DEPS) $(LOCAL_DEPS)
+	$(XELATEX) $<
+
+presentation: $(OUTPUT_PDF_PRESENTATION)
+
+$(OUTPUT_PDF_PRESENTATION): $(SOURCE_PDF_PRESENTATION) $(SOURCE_PDF_BASE) $(COMMON_RES_DEPS) $(LOCAL_DEPS)
+	$(XELATEX) $<
