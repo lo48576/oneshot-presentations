@@ -2,9 +2,16 @@
 % Requires: IPAexMincho font.
 
 % Use beamer.
-    \documentclass[
-        unicode% Use Japanese characters.
-    ]{beamer}
+    \ifdefined\ishandout
+        \documentclass[
+            unicode,% Use Japanese characters.
+            handout,% Generate handout.
+        ]{beamer}
+    \else
+        \documentclass[
+            unicode,% Use Japanese characters.
+        ]{beamer}
+    \fi
 
 % Path variables.
     \newcommand*\commonresourcedir{../../resources}
