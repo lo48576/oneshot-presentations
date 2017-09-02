@@ -5,6 +5,10 @@
     \documentclass[
         unicode% Use Japanese characters.
     ]{beamer}
+
+% Path variables.
+    \newcommand*\commonresourcedir{../../resources}
+
 % Use japanese font.
     \usepackage{zxjatype}
     \usepackage[ipaex]{zxjafont}
@@ -73,7 +77,7 @@
 % Custom.
     \newcommand*\hashtag[1]{{\texttt{\#}{#1}}}
 
-\logo{\includegraphics[width=2cm]{../../resources/sasori-bg.png}}
+\logo{\includegraphics[width=2cm]{\commonresourcedir/sasori-bg.png}}
 
 \title[文明人]{芝を生やさずに文明を進める方法もあります}
 \author{@lo48576 (らりお)}
